@@ -1,0 +1,103 @@
+<div class="container">
+ <div class="row">
+ <div class="col-2"></div>
+ <div class="col-8 jumbotron">
+ <form action="#">
+
+    <div class="form-group row">
+        <input type="hidden" id="latitude" name="latitude "/>
+        <input type="hidden" id="longitude" name="longitude"/>
+        <div class="cpl-sm-1"></div>
+
+        <label class="form-control-label col-sm-4">Location</label>
+
+        <div class="col-sm-1">
+            <a class="btn btn-info" onclick="initmodal()"><i class="fa fa-map-marker mr-2"></i>Choose Location</a>
+
+        </div>
+        <div class="col-sm-6"></div>
+
+ </div>
+ <div class="form group row">
+
+    <div class="col-sm-1"></div>
+    <label for="address" class="form-control-label col-sm-4">Address</label>
+    <div class="col-sm-6">
+        <textarea id="address" class="form-control" rows="5" name="address"></textarea>
+    </div>
+    <div class="col-sm-1"></div>
+
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-6  "></div>
+        <button type="submit" class="btn btn-info"> <i class="fa fa-save mr-2"></i>Save Address</button>
+    </div>
+    <div class="col-sm-2"></div>
+    </div>
+  </form>
+ </div>
+ <div class="col-sm-1"></div>
+ </div>
+ </div>
+ <!-- Modal -->
+
+<div class="modal fade" id="location-modal" tabindex="-1" role="dialog" aria-labelledby="location-modal" aria-hidden="true">
+<div class="modal-dialogue modal-dialogue-centered" role="document">
+    <div class="modal-content">
+
+        <div class="modal-header  bg-info text-while">
+            <h5 class="modal-title" id="address-label">Choose location </h5>
+            <button type="button" class="close" data-dismiss="modal"aria-label="close">
+             <span aria-hidden="true">&times;</span>  
+            </button>
+        </div>
+        <div class="modal-body">
+            <div id="map"></div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal"><i class="fa fa-check"></i>Done</button>
+          
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+ var map, marker;
+
+ function initmodal() {
+
+    $("#location-modal").modal()
+    var location = new google.maps.latlng(0,0);
+    var mapProperty = { center: location, zoom: 50, mapTypeId: google.maps.mapTypeId.ROADMAP};
+    map = new google.maps.Map(document.getElementById("map").mapPreperty);
+    marker = new google.maps.marker ({ map: map, draggable: true, animation: google.maps.Animation.DROP, position: location});
+
+    geocodeposition(marker.getPosition());
+
+    google.maps.event.addlistner(marker, dragged, function () {
+        map.setCentre(marker.getPosition()); 
+        geocodeposition(marker.getPosition());
+        $("#latitude").val(marker.getPosition().lat());
+        $("#longitude").val(marker.getPosition().lng());
+
+    });
+
+    currentLat = $("#altitude").val();
+    currentLng = $("#longitude").val();
+
+    if (navigator.geolocation) {
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            pos = 
+        }
+    }
+
+
+}
+ 
+
+</script>
